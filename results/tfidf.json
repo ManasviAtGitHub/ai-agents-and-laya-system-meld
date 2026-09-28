@@ -1,0 +1,145 @@
+{
+  "method": "tfidf",
+  "split": "test",
+  "details": {
+    "features": "word 1-2gram + char_wb 2-5gram TF-IDF",
+    "model": "LogisticRegression",
+    "selected_on_dev": {
+      "emotion": {
+        "C": 3.0,
+        "dev_weighted_f1": 0.5193874184526204
+      },
+      "sentiment": {
+        "C": 1.0,
+        "dev_weighted_f1": 0.6240041259225966
+      }
+    }
+  },
+  "meld_commit": "e8cedf27b5d2877e198332c957127e16eb214afe",
+  "python": "3.13.12",
+  "date": "2026-09-28",
+  "results": {
+    "emotion": {
+      "n": 2610,
+      "accuracy": 0.5961685823754789,
+      "weighted_f1": 0.5588545305628866,
+      "macro_f1": 0.3541933337851077,
+      "per_class_f1": {
+        "neutral": 0.755601516718373,
+        "joy": 0.4782608695652174,
+        "surprise": 0.5194805194805194,
+        "anger": 0.34285714285714286,
+        "sadness": 0.2052980132450331,
+        "disgust": 0.08108108108108109,
+        "fear": 0.0967741935483871
+      },
+      "support": {
+        "neutral": 1256,
+        "joy": 402,
+        "surprise": 281,
+        "anger": 345,
+        "sadness": 208,
+        "disgust": 68,
+        "fear": 50
+      },
+      "confusion": {
+        "neutral": {
+          "neutral": 1096,
+          "joy": 59,
+          "surprise": 39,
+          "anger": 31,
+          "sadness": 27,
+          "disgust": 0,
+          "fear": 4
+        },
+        "joy": {
+          "neutral": 153,
+          "joy": 187,
+          "surprise": 20,
+          "anger": 32,
+          "sadness": 9,
+          "disgust": 0,
+          "fear": 1
+        },
+        "surprise": {
+          "neutral": 75,
+          "joy": 38,
+          "surprise": 140,
+          "anger": 24,
+          "sadness": 4,
+          "disgust": 0,
+          "fear": 0
+        },
+        "anger": {
+          "neutral": 130,
+          "joy": 61,
+          "surprise": 37,
+          "anger": 96,
+          "sadness": 17,
+          "disgust": 3,
+          "fear": 1
+        },
+        "sadness": {
+          "neutral": 127,
+          "joy": 21,
+          "surprise": 10,
+          "anger": 16,
+          "sadness": 31,
+          "disgust": 0,
+          "fear": 3
+        },
+        "disgust": {
+          "neutral": 40,
+          "joy": 6,
+          "surprise": 10,
+          "anger": 8,
+          "sadness": 1,
+          "disgust": 3,
+          "fear": 0
+        },
+        "fear": {
+          "neutral": 24,
+          "joy": 8,
+          "surprise": 2,
+          "anger": 8,
+          "sadness": 5,
+          "disgust": 0,
+          "fear": 3
+        }
+      }
+    },
+    "sentiment": {
+      "n": 2610,
+      "accuracy": 0.6517241379310345,
+      "weighted_f1": 0.6404262403940706,
+      "macro_f1": 0.6064416292591127,
+      "per_class_f1": {
+        "neutral": 0.7544048903272205,
+        "positive": 0.5227513227513227,
+        "negative": 0.5421686746987951
+      },
+      "support": {
+        "neutral": 1256,
+        "positive": 521,
+        "negative": 833
+      },
+      "confusion": {
+        "neutral": {
+          "neutral": 1049,
+          "positive": 62,
+          "negative": 145
+        },
+        "positive": {
+          "neutral": 163,
+          "positive": 247,
+          "negative": 111
+        },
+        "negative": {
+          "neutral": 313,
+          "positive": 115,
+          "negative": 405
+        }
+      }
+    }
+  }
+}

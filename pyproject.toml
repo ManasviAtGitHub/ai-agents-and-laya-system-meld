@@ -1,0 +1,29 @@
+[project]
+name = "laya-meld"
+version = "0.1.0"
+description = "Multi-agent group conversation on MELD: Laya perceives and directs, small language models speak."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.13"
+dependencies = [
+    "laya[onnx]>=0.3.21",
+    "torch>=2.9",
+    "openvino>=2026.0",
+    "scikit-learn>=1.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/laya_meld"]
+
+# CPU-only PyTorch: never pull the CUDA build on machines without an NVIDIA GPU.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

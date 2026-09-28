@@ -1,0 +1,137 @@
+{
+  "method": "majority",
+  "split": "test",
+  "details": {
+    "majority_label": {
+      "emotion": "neutral",
+      "sentiment": "neutral"
+    }
+  },
+  "meld_commit": "e8cedf27b5d2877e198332c957127e16eb214afe",
+  "python": "3.13.12",
+  "date": "2026-09-28",
+  "results": {
+    "emotion": {
+      "n": 2610,
+      "accuracy": 0.4812260536398467,
+      "weighted_f1": 0.3126849060381001,
+      "macro_f1": 0.0928238858916562,
+      "per_class_f1": {
+        "neutral": 0.6497672012415934,
+        "joy": 0.0,
+        "surprise": 0.0,
+        "anger": 0.0,
+        "sadness": 0.0,
+        "disgust": 0.0,
+        "fear": 0.0
+      },
+      "support": {
+        "neutral": 1256,
+        "joy": 402,
+        "surprise": 281,
+        "anger": 345,
+        "sadness": 208,
+        "disgust": 68,
+        "fear": 50
+      },
+      "confusion": {
+        "neutral": {
+          "neutral": 1256,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "joy": {
+          "neutral": 402,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "surprise": {
+          "neutral": 281,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "anger": {
+          "neutral": 345,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "sadness": {
+          "neutral": 208,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "disgust": {
+          "neutral": 68,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        },
+        "fear": {
+          "neutral": 50,
+          "joy": 0,
+          "surprise": 0,
+          "anger": 0,
+          "sadness": 0,
+          "disgust": 0,
+          "fear": 0
+        }
+      }
+    },
+    "sentiment": {
+      "n": 2610,
+      "accuracy": 0.4812260536398467,
+      "weighted_f1": 0.3126849060381001,
+      "macro_f1": 0.21658906708053113,
+      "per_class_f1": {
+        "neutral": 0.6497672012415934,
+        "positive": 0.0,
+        "negative": 0.0
+      },
+      "support": {
+        "neutral": 1256,
+        "positive": 521,
+        "negative": 833
+      },
+      "confusion": {
+        "neutral": {
+          "neutral": 1256,
+          "positive": 0,
+          "negative": 0
+        },
+        "positive": {
+          "neutral": 521,
+          "positive": 0,
+          "negative": 0
+        },
+        "negative": {
+          "neutral": 833,
+          "positive": 0,
+          "negative": 0
+        }
+      }
+    }
+  }
+}

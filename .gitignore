@@ -1,0 +1,10 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+
+# Exported models (1.6 GB+): regenerate with scripts/export_onnx.py
+models/
+
+# MELD is downloaded by scripts/download_meld.py and never redistributed here
+data/

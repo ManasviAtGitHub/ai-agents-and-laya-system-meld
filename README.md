@@ -66,6 +66,31 @@ one call, OpenVINO FP32 backend (identical answers to PyTorch in our backend che
 regularisation was chosen on the dev split, never on test. MELD labels are pinned to upstream
 commit `e8cedf2`. On an i5-13420H CPU, Laya took about 1.1–1.6 s per utterance.
 
+## Fine-tuning Laya on MELD
+
+Training needs a GPU, so it runs on Kaggle:
+[`notebooks/finetune_meld_2xT4_kaggle.ipynb`](notebooks/finetune_meld_2xT4_kaggle.ipynb)
+(Accelerator **GPU T4 x2**, Internet **On**). The notebook clones this repo, so training data,
+questions and metrics come from the same code as the baselines.
+
+- **Data:** `laya_meld.finetune` turns each MELD utterance into two decisions (emotion and
+  sentiment), using exactly the baseline questions (`MELD_V1` = `ZERO_SHOT_V1`). Only the
+  weights change between the baseline and the fine-tuned run.
+- **Training:** Laya's RLCD method (policy gradient with proper scoring rules, plus soft
+  cross-entropy), adapted from the
+  [upstream notebook](https://github.com/NandhaKishorM/laya/tree/9d955671415fc19f069b9cc998928075c1f255ec/notebooks).
+  3 epochs, DDP on two T4s.
+- **Model selection:** the epoch with the best **dev** emotion weighted F1 is kept, and
+  temperatures are calibrated on dev. The test set is scored once, at the end.
+- **Outputs:** the checkpoint (`laya-meld-v1.zip`) and `results/laya_finetuned_v1.json`,
+  in the same format as the baselines.
+
+To inspect the training records locally before spending GPU time:
+
+```bash
+uv run scripts/build_finetune_data.py   # data/finetune/meld_{train,dev}.jsonl, tokenization check
+```
+
 ## Data and licences
 
 - Code: Apache-2.0.

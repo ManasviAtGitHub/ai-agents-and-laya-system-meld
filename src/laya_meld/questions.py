@@ -22,6 +22,11 @@ ZERO_SHOT_V1 = {
 }
 
 
+# Fine-tuning trains on exactly the zero-shot questions, so the only thing that changes between
+# the baseline and the fine-tuned run is the weights.
+MELD_V1 = ZERO_SHOT_V1
+
+
 def state_for(utterance):
     """What Laya sees for one utterance: the previous line as context, then the line itself."""
     return {"previous_line": utterance["previous"], "speaker": utterance["speaker"],

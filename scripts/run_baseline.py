@@ -9,22 +9,13 @@ predictions to results/predictions/laya_zero_shot_v1.jsonl and resumes from it, 
 interrupted run continues where it stopped.
 """
 import argparse
-import datetime
 import json
-import platform
 import time
 from importlib.metadata import version
 
-from laya_meld import data, metrics
+from laya_meld import data, evaluation, metrics
+from laya_meld.evaluation import TASKS
 from laya_meld.paths import RESULTS_DIR
-
-TASKS = {"emotion": data.EMOTIONS, "sentiment": data.SENTIMENTS}
-
-
-def score(test, predictions):
-    return {task: metrics.evaluate([u[task] for u in test], [predictions[u["id"]][task] for u in test],
-                                   labels)
-            for task, labels in TASKS.items()}
 
 
 def majority(train, test, args):
@@ -80,10 +71,7 @@ def laya(train, test, args):
     with open(out, "a", encoding="utf-8") as f:
         for i, u in enumerate(todo, 1):
             answers = agent.predict(state_for(u), ZERO_SHOT_V1)["answers"]
-            row = {"id": u["id"]}
-            for task in TASKS:
-                row[task] = answers[task]["choice"]
-                row[f"{task}_probabilities"] = answers[task]["probabilities"]
+            row = evaluation.laya_prediction(u["id"], answers)
             f.write(json.dumps(row) + "\n")
             f.flush()
             done[u["id"]] = row
@@ -109,18 +97,11 @@ def main():
     if args.limit:
         test = test[:args.limit]
     predictions, details = METHODS[args.method](train, test, args)
-    results = score(test, predictions)
+    results = evaluation.score(test, predictions)
 
     name = args.method if not args.limit else f"{args.method}_limit{args.limit}"
-    RESULTS_DIR.mkdir(exist_ok=True)
-    with open(RESULTS_DIR / f"{name}.json", "w", encoding="utf-8") as f:
-        json.dump({"method": args.method, "split": "test", "details": details,
-                   "meld_commit": data.MELD_COMMIT, "python": platform.python_version(),
-                   "date": datetime.date.today().isoformat(), "results": results}, f, indent=2)
-
-    for task, r in results.items():
-        print(f"{task:<10} n={r['n']}  accuracy {r['accuracy']:.3f}  weighted F1 {r['weighted_f1']:.3f}  "
-              f"macro F1 {r['macro_f1']:.3f}")
+    evaluation.write_result(name, args.method, details, results)
+    print(evaluation.summary(results))
 
 
 if __name__ == "__main__":
